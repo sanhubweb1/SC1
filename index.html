@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Authorized Service Centers</title>
+<style>
+:root{--navy:#0b1b3a;--bg:#f2f4f8;--card:#fff;--tx:#14213d;--mut:#6b7690;--ac:#0a84ff;--gr:#25d366;--ln:#e5e9f1;--sh:0 6px 24px rgba(15,30,70,.08)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+header{position:sticky;top:0;z-index:20;background:rgba(11,27,58,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0a84ff,#5e5ce6);display:grid;place-items:center;font-weight:700;flex:none}
+header h1{font-size:16px;margin:0;line-height:1.2}header p{margin:0;font-size:12px;opacity:.7}
+.hd{flex:1;min-width:0}
+button{font:inherit;cursor:pointer;border:0;transition:transform .15s,opacity .2s,background .2s}
+button:active{transform:scale(.96)}
+.gear{background:rgba(255,255,255,.14);color:#fff;border-radius:12px;width:40px;height:40px;font-size:18px}
+.hero{background:linear-gradient(180deg,var(--navy),#14295a);color:#fff;padding:calc(36px + env(safe-area-inset-top)) 16px 64px;text-align:center}
+#hH{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;cursor:default}
+.hero h2{font-size:clamp(24px,6vw,38px);margin:0 0 8px;letter-spacing:-.02em}
+.hero p{margin:0 auto;max-width:560px;opacity:.78}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:6px 12px;font-size:13px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 14px}
+.search{margin:-30px auto 18px;max-width:640px}
+.search input{width:100%;padding:16px 18px;font-size:16px;border:0;border-radius:16px;box-shadow:var(--sh);outline:none;background:#fff}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.card{background:var(--card);border-radius:22px;padding:18px;box-shadow:var(--sh);animation:up .4s ease both}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.top{display:flex;gap:12px;align-items:center}
+.lg{width:56px;height:56px;border-radius:14px;background:#eef2fa;color:var(--ac);display:grid;place-items:center;font-weight:700;font-size:20px;overflow:hidden;flex:none;border:1px solid var(--ln)}
+.lg img{width:100%;height:100%;object-fit:contain;background:#fff}
+.brand{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ac);text-transform:uppercase}
+.nm{font-size:17px;font-weight:650;margin:0}
+.lbl{font-size:12px;font-weight:600;color:var(--mut);margin:14px 0 4px}
+.card ul{margin:0;padding-left:20px;font-size:14px}
+.row{font-size:14px;margin:3px 0}.row b{color:var(--mut);font-weight:600}
+.note{background:#fff8e6;border-radius:12px;padding:10px 12px;font-size:13px;margin-top:12px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.btn{padding:12px;border-radius:13px;font-size:14px;font-weight:600;background:#eef2fa;color:var(--tx);text-decoration:none;text-align:center;display:block}
+.btn.p{background:var(--ac);color:#fff}.btn.g{background:var(--gr);color:#fff}.btn.d{background:#fee;color:#b3261e}.btn.w{grid-column:span 2}
+.filt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:640px;margin:18px auto 0}
+.filt select{padding:11px 6px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.12);color:#fff;font-size:13px;appearance:none;-webkit-appearance:none;text-align:center;text-align-last:center;width:100%}
+.filt option{color:#14213d}
+.stats{display:flex;justify-content:center;gap:10px;margin-top:18px}
+.stats div{flex:1;max-width:150px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:10px 6px}
+.stats b{display:block;font-size:22px;line-height:1.1}.stats span{font-size:12px;opacity:.7}
+.sect{display:flex;justify-content:space-between;align-items:baseline;margin:6px 4px 12px;border-bottom:2px solid var(--navy);padding-bottom:8px}
+.sect h3{margin:0;font-size:18px;color:var(--navy)}.sect span{font-size:13px;color:var(--mut)}
+.ver{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:99px;background:#e7f6ec;color:#1a7f3c;font-size:10px;letter-spacing:.02em;text-transform:none;font-weight:700;vertical-align:1px}
+.card{border:1px solid var(--ln);border-top:3px solid var(--navy);border-radius:16px;box-shadow:0 2px 10px rgba(15,30,70,.06)}
+.gd{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:16px;margin-top:18px;box-shadow:0 2px 10px rgba(15,30,70,.06)}
+.gd h3{margin:0 0 8px;font-size:16px;color:var(--navy)}.gd ol{margin:0;padding-left:20px;font-size:14px}.gd li{margin:4px 0}
+.row a{color:var(--ac);word-break:break-all}
+.tag{font-size:12px;color:var(--mut);margin-top:2px}
+.two input{min-width:0}
+.empty{text-align:center;color:var(--mut);padding:40px 0}
+.attn{background:#fff;border-radius:20px;padding:18px;margin:22px 0;box-shadow:var(--sh);white-space:pre-line;font-size:14px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:10px 16px calc(28px + env(safe-area-inset-bottom))}
+.ad{margin:16px 0;text-align:center;overflow:hidden}
+.back{display:none;margin:0 auto 14px;background:#fff;border-radius:99px;padding:10px 18px;box-shadow:var(--sh);font-weight:600;color:var(--ac)}
+.ov{position:fixed;inset:0;background:rgba(10,20,40,.5);backdrop-filter:blur(6px);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:820px;max-height:94vh;overflow:auto;border-radius:26px 26px 0 0;padding:18px 16px calc(24px + env(safe-area-inset-bottom));animation:up .3s ease}
+@media(min-width:700px){.ov{align-items:center}.sheet{border-radius:26px}}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sh h3{margin:0}
+.x{background:#e3e7f0;border-radius:50%;width:34px;height:34px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px}
+.tab{white-space:nowrap;padding:9px 14px;border-radius:99px;background:#e3e7f0;font-size:13px;font-weight:600;color:var(--tx)}
+.tab.on{background:var(--navy);color:#fff}
+.pane{background:#fff;border-radius:18px;padding:14px}
+label{display:block;font-size:13px;font-weight:600;color:var(--mut);margin:12px 0 4px}
+input[type=text],input[type=password],textarea,select{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;font:inherit;font-size:16px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.li{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln)}.li:last-child{border:0}
+.li .t{flex:1;min-width:0;font-size:14px}.li .t small{color:var(--mut);display:block}
+.li .btn{padding:8px 12px;font-size:13px}
+.pv{width:72px;height:72px;object-fit:contain;border:1px solid var(--ln);border-radius:12px;margin-top:8px;display:none;background:#fff}
+.two{display:flex;gap:8px;margin-top:14px}.two .btn{flex:1}
+.qr{text-align:center;margin-top:14px}.qr img{width:240px;max-width:100%;border:8px solid #fff;border-radius:12px}
+.small{font-size:12px;color:var(--mut);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<section class="hero">
+  <h2 id="hH">Authorized Laptop Service Centers</h2>
+  <div class="filt"><select id="fC" aria-label="Category"></select><select id="fS" aria-label="State"></select><select id="fA" aria-label="Area"></select></div>
+</section>
+<main class="wrap">
+  <div class="search"><input id="q" type="search" placeholder="Search brand, service center, area or phone..."></div>
+  <div id="adTop" class="ad"></div>
+  <div style="text-align:center"><button class="back" id="back">← Show all service centers</button></div>
+  <div class="sect"><h3>Service Center Directory</h3><span id="cnt"></span></div>
+  <div class="grid" id="grid"></div>
+  <div id="guide"></div>
+  <div class="attn" id="attn"></div>
+  <div id="adBot" class="ad"></div>
+</main>
+<footer id="foot"></footer>
+
+<div class="ov" id="pwOv"><div class="sheet" style="max-width:380px;border-radius:26px;margin:auto">
+  <h3 style="margin-top:0">🔒 Settings</h3>
+  <label>Enter password</label><input type="password" id="pw" inputmode="numeric" autocomplete="off">
+  <div class="two"><button class="btn" id="pwNo">Cancel</button><button class="btn p" id="pwOk">Unlock</button></div>
+</div></div>
+
+<div class="ov" id="adOv"><div class="sheet">
+  <div class="sh"><h3>Settings</h3><button class="x" id="adX">✕</button></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="pane" id="pane"></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZCLZua0QGIjlnCBw95Fp-gU_LF4MiRM4",
+  authDomain: "sanhubweb1.firebaseapp.com",
+  databaseURL: "https://sanhubweb1-default-rtdb.firebaseio.com",
+  projectId: "sanhubweb1",
+  storageBucket: "sanhubweb1.appspot.com",
+  messagingSenderId: "145459093063",
+  appId: "1:145459093063:web:df17c173b97464906b5b62",
+  measurementId: "G-WFGX3ZE55G"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const KEY='asc_data_v1', PASS='9653435223';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'center';
+
+function demo(){
+ const c=(brand,name,address,o)=>Object.assign({id:slug(brand),brand,name,address,mobile:'',phone:'',toll:'',maps:'',note:'',logo:'',cat:'Laptop',state:'Maharashtra',area:'Thane'},o);
+ return {
+  site:{title:'Authorized Service Centers',heading:'Authorized Laptop Service Centers',sub:'Find brand-wise authorized service centers, contact details, toll-free numbers and directions.',
+   note:'⚠️ Attention\n\nPlease carry your original invoice / warranty documents when visiting the service center. Service availability and working hours may change. Please confirm with the service center before visiting.',
+   footer:'© Authorized Service Centers'},
+  ads:{pub:'',top:'',bottom:''},
+  cats:['Laptop','Accessories','Printer'],
+  states:[{name:'Maharashtra',areas:['Mumbai','Navi Mumbai','Thane']}],
+  stats:{total:0,last:''},gc:'',
+  centers:[
+   c('Samsung','MICRO SERVICES','Office No. 4, Lokmanya Society, 1st Floor, Veer Savarkar Marg, Naupada, Above Prasadalaya & Sindhudurg Hotel, Near Teen Petrol Pump, Thane West - 400602.',{mobile:'7977117910',toll:'1800-407-267864'}),
+   c('Acer','S.K. TELECARE','Valiabh Kutir, Shop No.201, 2nd Floor, Shivaji Chowk, Opp. To Krishna Cinema, Kalyan (W)',{mobile:'08425918282 / 93233082885',toll:'08062346677'}),
+   c('Lenovo','IMPACT Infotech Pvt. Ltd.','Shop No. 4, World Holidays, Shree Datta Prasad Building, Near Cross, Ram Maruti Rd, Opp. New English School, Naupada, Thane - 400602.',{phone:'7506654779 / 7506654789',toll:'1800-419-7555'}),
+   c('Asus','TVS Electronics Ltd.','Shop no -108, 1st Floor, Sai Deep Society, Electronic Market, Thane West - 400601.',{mobile:'9619563555 / 9619562444',toll:'1800-209-0365'}),
+   c('HP','HP','B-402, Raj Darshan Society, Opp Rowdy Momos, Dada Patil Wadi, Station Road, Thane West, Thane - 400601.',{mobile:'9684025710-11-12',toll:'1800-258-7170'}),
+   c('Dell','MEDIA ENTERPRISES','Shop No. 82, 2nd Floor, PP Chambers, Shahid Bhagat Singh Rd, Dombivli East - 421201 (Near KDMC Office).',{mobile:'8097177602 / 7021977684',toll:'1800-420-0088'})
+  ]};
+}
+let D;
+function load(){try{D=JSON.parse(localStorage.getItem(KEY));}catch(e){D=null}
+ if(!D||!D.centers||!D.site){D=demo();saveLocal();}
+ norm();}
+function norm(){D.ads=D.ads||{pub:'',top:'',bottom:''};D.cats=D.cats||['Laptop','Accessories','Printer'];
+ D.states=D.states||[{name:'Maharashtra',areas:['Mumbai','Navi Mumbai','Thane']}];D.stats=D.stats||{total:0,last:''};D.gc=D.gc||'';D.guides=D.guides||{};
+ D.centers.forEach(c=>{if(c.cat==null)c.cat='Laptop';if(c.state==null)c.state='Maharashtra';if(c.area==null)c.area='Thane'});}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){toast('Storage full');return false} return true}
+
+async function saveToFirebase(){
+ try{
+  const dbRef = ref(db, 'siteData');
+  await set(dbRef, D);
+  toast('Firebase par live update ho gaya!');
+}catch(e){
+  toast('Firebase sync fail: '+e.message);
+}
+}
+
+function save(){
+ if(!saveLocal())return false;
+ scheduleFirebasePush();
+ return true;
+}
+
+let pushT;
+function scheduleFirebasePush(){
+ clearTimeout(pushT);
+ pushT=setTimeout(()=>{
+  saveToFirebase();
+ }, 1500);
+}
+
+async function refreshFromFirebase(){
+ try{
+  const dbRef = ref(db);
+  const snapshot = await get(child(dbRef, 'siteData'));
+  if(snapshot.exists()){
+   const j = snapshot.val();
+   if(j && j.site && Array.isArray(j.centers)){
+    const st = D.stats;
+    D = j;
+    D.stats = st || {total:0,last:''};
+    norm();
+    saveLocal();
+    parseHash();
+    render();
+   }
+  }
+ }catch(e){}
+}
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2400)}
+
+let focusId=null;
+const addrList=a=>String(a||'').split(',').map(s=>s.trim().replace(/\.$/,'')).filter(Boolean);
+const firstNum=c=>{const n=(c.mobile||c.phone||c.toll||'').split('/')[0].trim();return n.replace(/[^\d+]/g,'')};
+const mapsUrl=c=>c.maps||('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((c.name+' '+c.address).trim()));
+function shareText(c){
+ const L=['🔧 Authorized Service Center','','Brand: '+c.brand,'Service Center: '+c.name,'','📍 Address:',addrList(c.address).map(x=>'• '+x).join('\n')];
+ if(c.mobile)L.push('','📱 Mobile:',c.mobile);
+ if(c.phone)L.push('','☎ Phone:',c.phone);
+ if(c.toll)L.push('','🎧 Toll-Free:',c.toll);
+ if(c.email)L.push('','✉ Email:',c.email);
+ if(c.website)L.push('','🌐 Website:',c.website);
+ if(c.note)L.push('','📝 Note:',c.note);
+ L.push('','🗺️ Google Maps:',mapsUrl(c));
+ return L.join('\n');
+}
+function card(c,i){
+ const ini=esc(c.brand.slice(0,2).toUpperCase());
+ const num=firstNum(c);
+ return `<div class="card" style="animation-delay:${Math.min(i,8)*50}ms">
+ <div class="top"><div class="lg">${c.logo?`<img src="${c.logo}" alt="">`:ini}</div><div><div class="brand">${esc(c.brand)}<span class="ver">✔ Authorized</span></div><p class="nm">${esc(c.name)}</p><div class="tag">${[c.cat,c.area,c.state].filter(Boolean).map(esc).join(' · ')}</div></div></div>
+ <div class="lbl">📍 Address</div><ul>${addrList(c.address).map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
+ <div class="lbl">Contact</div>
+ ${c.mobile?`<div class="row"><b>📱 Mobile:</b> ${esc(c.mobile)}</div>`:''}
+ ${c.phone?`<div class="row"><b>☎ Phone:</b> ${esc(c.phone)}</div>`:''}
+ ${c.toll?`<div class="row"><b>🎧 Toll-Free:</b> ${esc(c.toll)}</div>`:''}
+ ${c.email?`<div class="row"><b>✉ Email:</b> <a href="mailto:${esc(c.email)}">${esc(c.email)}</a></div>`:''}
+ ${c.website?`<div class="row"><b>🌐 Website:</b> <a target="_blank" rel="noopener" href="${esc(/^https?:\/\//i.test(c.website)?c.website:'https://'+c.website)}">${esc(c.website.replace(/^https?:\/\//i,''))}</a></div>`:''}
+ ${c.note?`<div class="note">📝 ${esc(c.note)}</div>`:''}
+ <div class="btns">
+  <a class="btn p" target="_blank" rel="noopener" href="${esc(mapsUrl(c))}">🗺️ Google Maps</a>
+  ${num?`<a class="btn" href="tel:${esc(num)}">📞 Call</a>`:`<span class="btn" style="opacity:.4">📞 Call</span>`}
+  <a class="btn g w" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(shareText(c))}">💬 WhatsApp Share</a>
+  <button class="btn w" data-copy="${esc(c.id)}">📋 Copy Address</button>
+ </div></div>`;
+}
+let fc={cat:'',state:'',area:''};
+const areasOf=n=>{const st=D.states.find(x=>x.name===n);return st?st.areas:[].concat(...D.states.map(x=>x.areas))};
+function drawFilters(){
+ const o=(arr,all,v)=>`<option value="">${all}</option>`+arr.map(x=>`<option${x===v?' selected':''}>${esc(x)}</option>`).join('');
+ if(!D.cats.includes(fc.cat))fc.cat='';
+ if(!D.states.some(s=>s.name===fc.state))fc.state='';
+ const ar=areasOf(fc.state);if(!ar.includes(fc.area))fc.area='';
+ $('#fC').innerHTML=o(D.cats,'All Categories',fc.cat);
+ $('#fS').innerHTML=o(D.states.map(s=>s.name),'All States',fc.state);
+ $('#fA').innerHTML=o(ar,'All Areas',fc.area);
+}
+function render(){
+ const s=D.site;document.title=s.title;drawFilters();
+ $('#hH').textContent=s.heading;
+ $('#attn').textContent=s.note;$('#attn').style.display=s.note?'':'none';$('#foot').textContent=s.footer;
+ const q=$('#q').value.trim().toLowerCase();
+ let list=D.centers;
+ if(focusId){list=list.filter(c=>c.id===focusId);}
+ else{list=list.filter(c=>(!fc.cat||c.cat===fc.cat)&&(!fc.state||c.state===fc.state)&&(!fc.area||c.area===fc.area));
+  if(q)list=list.filter(c=>[c.brand,c.name,c.address,c.mobile,c.phone,c.toll,c.cat,c.state,c.area].join(' ').toLowerCase().includes(q));}
+ $('#back').style.display=focusId?'inline-block':'none';
+ $('#cnt').textContent=list.length+' result'+(list.length==1?'':'s');
+ $('#grid').innerHTML=list.length?list.map(card).join(''):'<div class="empty" style="grid-column:1/-1">No service centers found.</div>';
+ const only=focusId?((D.centers.find(c=>c.id===focusId)||{}).cat):fc.cat;
+ $('#guide').innerHTML=D.cats.filter(c=>(D.guides[c]||'').trim()&&(!only||only===c)).map(c=>`<div class="gd"><h3>📘 Guide – ${esc(c)}</h3><ol>${D.guides[c].split('\n').map(x=>x.trim()).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`).join('');
+ ads();
+}
+function parseHash(){const m=location.hash.match(/center=([^&]+)/);focusId=m?decodeURIComponent(m[1]):null;
+ if(focusId&&!D.centers.some(c=>c.id===focusId))focusId=null;}
+$('#q').addEventListener('input',()=>{if(focusId){focusId=null;history.replaceState(null,'',location.pathname+location.search)}render()});
+function fch(){if(focusId){focusId=null;history.replaceState(null,'',location.pathname+location.search)}render()}
+$('#fC').onchange=e=>{fc.cat=e.target.value;fch()};
+$('#fS').onchange=e=>{fc.state=e.target.value;fc.area='';fch()};
+$('#fA').onchange=e=>{fc.area=e.target.value;fch()};
+$('#grid').addEventListener('click',e=>{
+ const b=e.target.closest('[data-copy]');if(!b)return;
+ const c=D.centers.find(x=>x.id===b.dataset.copy);if(!c)return;
+ const t=c.brand+' - '+c.name+'\n'+addrList(c.address).join('\n');
+ const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Address copied')}catch(x){toast('Copy failed')}a.remove()};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(()=>toast('Address copied'),fb);else fb();
+});
+$('#back').onclick=()=>{focusId=null;history.replaceState(null,'',location.pathname+location.search);render()};
+window.addEventListener('hashchange',()=>{parseHash();render()});
+
+function ads(){
+ const a=D.ads,pubOk=/^ca-pub-\d{10,}$/.test((a.pub||'').trim());
+ [['#adTop',a.top],['#adBot',a.bottom]].forEach(([sel,slot])=>{
+  const el=$(sel);el.innerHTML='';
+  if(!pubOk||!/^\d{5,}$/.test((slot||'').trim())){el.style.display='none';return}
+  el.style.display='';
+  const ins=document.createElement('ins');ins.className='adsbygoogle';ins.style.display='block';
+  ins.setAttribute('data-ad-client',a.pub.trim());ins.setAttribute('data-ad-slot',slot.trim());
+  ins.setAttribute('data-ad-format','auto');ins.setAttribute('data-full-width-responsive','true');
+  el.appendChild(ins);
+  if(!document.getElementById('adsjs')){const s=document.createElement('script');s.id='adsjs';s.async=true;s.crossOrigin='anonymous';
+   s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+a.pub.trim();document.head.appendChild(s);}
+  try{(window.adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}
+ });
+}
+
+let taps=0,tapT;
+$('#hH').addEventListener('click',()=>{
+ taps++;clearTimeout(tapT);tapT=setTimeout(()=>{taps=0},2500);
+ if(taps>=10){taps=0;$('#pw').value='';$('#pwOv').classList.add('on');setTimeout(()=>$('#pw').focus(),50)}
+});
+$('#pwNo').onclick=()=>$('#pwOv').classList.remove('on');
+function tryPw(){if($('#pw').value===PASS){$('#pwOv').classList.remove('on');$('#pw').value='';openAdmin()}else{toast('Incorrect password');$('#pw').value=''}}
+$('#pwOk').onclick=tryPw;$('#pw').addEventListener('keydown',e=>{if(e.key==='Enter')tryPw()});
+$('#adX').onclick=()=>{$('#adOv').classList.remove('on')};
+
+const TABS=[['list','Service Centers'],['form','Add / Edit'],['site','Website Settings'],['flt','Category / State / Area'],['gd','Customer Guide'],['qr','QR Codes'],['ads','Google Ads'],['vis','Visitors'],['bak','Backup / Restore']];
+let tab='list',editId=null,logoData='';
+function openAdmin(){tab='list';editId=null;$('#adOv').classList.add('on');drawAdmin()}
+function drawAdmin(){
+ $('#tabs').innerHTML=TABS.map(t=>`<button class="tab ${t[0]===tab?'on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+ $('#tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{tab=b.dataset.t;if(tab!=='form'){editId=null}drawAdmin()});
+ ({list:pList,form:pForm,site:pSite,flt:pFlt,gd:pGuide,qr:pQr,ads:pAds,vis:pVis,bak:pBak})[tab]();
+}
+function pList(){
+ const p=$('#pane');
+ p.innerHTML=D.centers.length?D.centers.map(c=>`<div class="li"><div class="lg" style="width:44px;height:44px;font-size:16px">${c.logo?`<img src="${c.logo}" alt="">`:esc(c.brand.slice(0,2).toUpperCase())}</div>
+ <div class="t"><b>${esc(c.brand)}</b><small>${esc(c.name)}</small></div>
+ <button class="btn" data-e="${esc(c.id)}">Edit</button><button class="btn d" data-d="${esc(c.id)}">Delete</button></div>`).join(''):'<div class="empty">No service centers yet.</div>';
+ p.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{editId=b.dataset.e;tab='form';drawAdmin()});
+ p.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const c=D.centers.find(x=>x.id===b.dataset.d);
+  if(confirm('Delete "'+c.brand+' – '+c.name+'"?')){D.centers=D.centers.filter(x=>x!==c);save();render();pList();toast('Deleted')}});
+}
+function pForm(){
+ const c=D.centers.find(x=>x.id===editId)||{brand:'',name:'',address:'',mobile:'',phone:'',toll:'',maps:'',note:'',logo:'',cat:'',state:'',area:'',email:'',website:''};
+ const sel=(id,l,arr,v)=>`<label>${l}</label><select id="f_${id}"><option value="">— None —</option>${arr.map(x=>`<option${x===v?' selected':''}>${esc(x)}</option>`).join('')}</select>`;
+ logoData=c.logo||'';
+ const f=(id,l,v,ph)=>`<label>${l}</label><input type="text" id="f_${id}" value="${esc(v)}" placeholder="${ph||''}">`;
+ $('#pane').innerHTML=`<b>${editId?'Edit':'Add'} Service Center</b>
+ ${f('brand','Brand Name',c.brand)}${f('name','Service Center Name',c.name)}
+ ${sel('cat','Category',D.cats,c.cat)}${sel('state','State',D.states.map(s=>s.name),c.state)}${sel('area','Area',areasOf(c.state),c.area)}
+ <label>Address (comma-separated)</label><textarea id="f_address">${esc(c.address)}</textarea>
+ ${f('mobile','Mobile Number',c.mobile)}${f('phone','Phone Number',c.phone)}${f('toll','Toll-Free Number',c.toll)}${f('maps','Google Maps Link',c.maps,'https://maps.app.goo.gl/...')}${f('email','Brand Email ID',c.email,'support@brand.com')}${f('website','Brand Website',c.website,'www.brand.com')}
+ <label>Service Center Note</label><textarea id="f_note">${esc(c.note)}</textarea>
+ <label>Brand Logo / Service Center Logo</label><input type="file" id="f_logo" accept="image/*">
+ <img class="pv" id="pv" alt="">
+ <div class="two"><button class="btn" id="fClear">Clear</button><button class="btn p" id="fSave">Save</button></div>`;
+ const pv=$('#pv');if(logoData){pv.src=logoData;pv.style.display='block'}
+ $('#f_logo').onchange=e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const m=256,k=Math.min(1,m/Math.max(im.width,im.height));
+   const cv=document.createElement('canvas');cv.width=Math.round(im.width*k);cv.height=Math.round(im.height*k);
+   cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);logoData=cv.toDataURL('image/png');pv.src=logoData;pv.style.display='block'};im.src=r.result};r.readAsDataURL(file)};
+ $('#f_state').onchange=()=>{$('#f_area').innerHTML='<option value="">— None —</option>'+areasOf($('#f_state').value).map(x=>`<option>${esc(x)}</option>`).join('')};
+ $('#fClear').onclick=()=>{editId=null;drawAdmin()};
+ $('#fSave').onclick=()=>{
+  const g=k=>$('#f_'+k).value.trim();
+  if(!g('brand')||!g('name')||!g('address')){toast('Brand, name and address are required');return}
+  const o={brand:g('brand'),name:g('name'),address:g('address'),mobile:g('mobile'),phone:g('phone'),toll:g('toll'),maps:g('maps'),note:g('note'),logo:logoData,cat:g('cat'),state:g('state'),area:g('area'),email:g('email'),website:g('website')};
+  if(editId){Object.assign(D.centers.find(x=>x.id===editId),o)}
+  else{let id=slug(o.brand),n=2;while(D.centers.some(x=>x.id===id))id=slug(o.brand)+'-'+n++;D.centers.push(Object.assign({id},o))}
+  if(save()){render();toast('Saved');editId=null;tab='list';drawAdmin()}
+ };
+}
+function pSite(){
+ const s=D.site;
+ $('#pane').innerHTML=`<b>Website Settings</b>
+ <label>Website title</label><input type="text" id="s_title" value="${esc(s.title)}">
+ <label>Main heading</label><input type="text" id="s_heading" value="${esc(s.heading)}">
+ <label>Attention Note</label><textarea id="s_note" style="min-height:140px">${esc(s.note)}</textarea>
+ <label>Footer text</label><input type="text" id="s_footer" value="${esc(s.footer)}">
+ <div class="two"><button class="btn p" id="sSave">Save</button></div>`;
+ $('#sSave').onclick=()=>{['title','heading','note','footer'].forEach(k=>D.site[k]=$('#s_'+k).value);if(save()){render();toast('Saved')}};
+}
+let qrUrl='',qrData='';
+function pQr(){
+ $('#pane').innerHTML=`<b>QR Codes</b><label>Select service center</label>
+ <select id="qSel">${D.centers.map(c=>`<option value="${esc(c.id)}">${esc(c.brand)} –${esc(c.name)}</option>`).join('')}</select>
+ <div class="two"><button class="btn p" id="qGen">Generate QR</button></div>
+ <div class="qr" id="qOut"></div>
+ <div class="two" id="qBtns" style="display:none"><button class="btn" id="qDl">Download QR</button><button class="btn" id="qCp">Copy Link</button></div>`;
+ $('#qGen').onclick=()=>{
+  const id=$('#qSel').value;if(!id)return;
+  qrUrl=location.href.split('#')[0].split('?')[0]+'#center='+encodeURIComponent(id);
+  if(typeof qrcode!=='function'){toast('QR library failed to load');return}
+  const q=qrcode(0,'M');q.addData(qrUrl);q.make();qrData=q.createDataURL(8,4);
+  $('#qOut').innerHTML=`<img src="${qrData}" alt="QR"><div class="small" style="word-break:break-all">${esc(qrUrl)}</div>`;
+  $('#qBtns').style.display='flex';
+ };
+ $('#qDl').onclick=()=>{const a=document.createElement('a');a.href=qrData;a.download='qr-'+$('#qSel').value+'.png';document.body.appendChild(a);a.click();a.remove()};
+ $('#qCp').onclick=()=>{
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(qrUrl).then(()=>toast('Link copied'),()=>fb());else fb();
+  function fb(){const t=document.createElement('textarea');t.value=qrUrl;document.body.appendChild(t);t.select();try{document.execCommand('copy');toast('Link copied')}catch(e){toast('Copy failed')}t.remove()}
+ };
+}
+function pAds(){
+ const a=D.ads;
+ $('#pane').innerHTML=`<b>Google AdSense</b>
+ <label>Publisher ID</label><input type="text" id="a_pub" value="${esc(a.pub)}" placeholder="ca-pub-1234567890123456">
+ <label>Top Ad Slot ID</label><input type="text" id="a_top" value="${esc(a.top)}" placeholder="1234567890">
+ <label>Bottom Ad Slot ID</label><input type="text" id="a_bottom" value="${esc(a.bottom)}" placeholder="1234567890">
+ <div class="two"><button class="btn p" id="aSave">Save</button></div>`;
+ $('#aSave').onclick=()=>{D.ads={pub:$('#a_pub').value.trim(),top:$('#a_top').value.trim(),bottom:$('#a_bottom').value.trim()};if(save()){render();toast('Saved')}};
+}
+function pBak(){
+ $('#pane').innerHTML=`<b>Backup / Restore</b>
+ <div class="two"><button class="btn p" id="bEx">Export Backup</button></div>
+ <label>Import Backup (JSON)</label><input type="file" id="bIm" accept="application/json,.json">
+ <div class="two"><button class="btn d" id="bRs">Reset Demo Data</button></div>`;
+ $('#bEx').onclick=()=>{const b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download='backup.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+ $('#bIm').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.site||!Array.isArray(j.centers))throw 0;
+   if(!confirm('Replace data?'))return;
+   D=j;norm();save();render();toast('Restored');pBak()}catch(x){toast('Invalid file')}};r.readAsText(f)};
+ $('#bRs').onclick=()=>{if(confirm('Reset demo data?')){D=demo();save();render();toast('Demo restored')}};
+}
+function pFlt(){
+ const p=$('#pane');
+ const row=(t,a)=>`<div class="li"><div class="t">${t}</div><button class="btn" data-r="${a}">Edit</button><button class="btn d" data-x="${a}">Delete</button></div>`;
+ const add=(id,ph,a)=>`<div class="two"><input type="text" id="${id}" placeholder="${ph}"><button class="btn p" data-a="${a}" style="flex:none;width:80px">Add</button></div>`;
+ p.innerHTML=`<b>Categories</b>`+D.cats.map((x,i)=>row(esc(x),'c:'+i)).join('')+add('nc','New category','c')+
+ `<hr style="border:0;border-top:1px solid var(--ln);margin:18px 0"><b>States &amp; Areas</b>`+
+ D.states.map((s,i)=>row('<b>'+esc(s.name)+'</b>','s:'+i)+s.areas.map((a,j)=>`<div style="margin-left:18px">${row('↳ '+esc(a),'a:'+i+':'+j)}</div>`).join('')+
+  `<div style="margin-left:18px">${add('na'+i,'New area','a:'+i)}</div>`).join('')+add('ns','New state','s');
+ p.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const k=b.dataset.a.split(':');
+  const v=(k[0]==='c'?$('#nc'):k[0]==='s'?$('#ns'):$('#na'+k[1])).value.trim();if(!v)return;
+  if(k[0]==='c'){if(!D.cats.includes(v))D.cats.push(v)}
+  else if(k[0]==='s'){if(!D.states.some(s=>s.name===v))D.states.push({name:v,areas:[]})}
+  else{const ar=D.states[k[1]].areas;if(!ar.includes(v))ar.push(v)}
+  save();render();pFlt()});
+ p.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const k=b.dataset.r.split(':');
+  const old=k[0]==='c'?D.cats[k[1]]:k[0]==='s'?D.states[k[1]].name:D.states[k[1]].areas[k[2]];
+  const v=(prompt('Rename',old)||'').trim();if(!v||v===old)return;
+  if(k[0]==='c'){D.cats[k[1]]=v;if(D.guides[old]!=null){D.guides[v]=D.guides[old];delete D.guides[old]}D.centers.forEach(c=>{if(c.cat===old)c.cat=v})}
+  else if(k[0]==='s'){D.states[k[1]].name=v;D.centers.forEach(c=>{if(c.state===old)c.state=v})}
+  else{const sn=D.states[k[1]].name;D.states[k[1]].areas[k[2]]=v;D.centers.forEach(c=>{if(c.state===sn&&c.area===old)c.area=v})}
+  save();render();pFlt()});
+ p.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{const k=b.dataset.x.split(':');
+  if(!confirm('Delete this item?'))return;
+  if(k[0]==='c'){const old=D.cats[k[1]];D.cats.splice(k[1],1);delete D.guides[old];D.centers.forEach(c=>{if(c.cat===old)c.cat=''})}
+  else if(k[0]==='s'){const old=D.states[k[1]].name;D.states.splice(k[1],1);D.centers.forEach(c=>{if(c.state===old){c.state='';c.area=''}})}
+  else{const sn=D.states[k[1]].name,old=D.states[k[1]].areas[k[2]];D.states[k[1]].areas.splice(k[2],1);D.centers.forEach(c=>{if(c.state===sn&&c.area===old)c.area=''})}
+  save();render();pFlt()});
+}
+function pGuide(){
+ $('#pane').innerHTML=`<b>Customer Guide</b>`+
+ D.cats.map((c,i)=>`<label>Guide – ${esc(c)}</label><textarea id="g_${i}" style="min-height:130px">${esc(D.guides[c]||'')}</textarea>`).join('')+
+ `<div class="two"><button class="btn p" id="gSv">Save</button></div>`;
+ $('#gSv').onclick=()=>{D.cats.forEach((c,i)=>{const v=$('#g_'+i).value.trim();if(v)D.guides[c]=v;else delete D.guides[c]});if(save()){render();toast('Saved')}};
+}
+function pVis(){
+ const s=D.stats;
+ $('#pane').innerHTML=`<b>Website Visitors</b>
+ <div class="row" style="font-size:16px;margin-top:12px"><b>Visits:</b> ${s.total}</div>
+ <div class="row"><b>Last visit:</b> ${esc(s.last||'—')}</div>`;
+}
+
+load();parseHash();
+try{if(!sessionStorage.getItem('asc_s')){sessionStorage.setItem('asc_s','1');D.stats.total++;D.stats.last=new Date().toLocaleString();saveLocal();}}catch(e){}
+render();
+refreshFromFirebase();
+</script>
+</body>
+</html>
